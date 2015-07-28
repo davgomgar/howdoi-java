@@ -1,5 +1,8 @@
 package es.dgg.howdoi;
 
+import es.dgg.howdoi.google.GoogleQueryStringGenerator;
+
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -12,10 +15,15 @@ public class Main  {
         }
 
         String query = args[0];
-        String sanitizedQuery = query.replaceAll("?", "");
-        QueryStringGenerator generator = new QueryStringGenerator();
-        HowDoI howdoi = new HowDoI(sanitizedQuery, generator);
-        Optional<String> instructions = howdoi.fetchResults();
+        String sanitizedQuery = query.replaceAll("\\?", "");
+        Optional<String> instructions = null;
+        try {
+            GoogleQueryStringGenerator generator = new GoogleQueryStringGenerator();
+            HowDoI howdoi = new HowDoI(sanitizedQuery, generator);
+            instructions = howdoi.getAnswer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Instructions = " + instructions.orElse("Sorry, no results found"));
     }
 }
