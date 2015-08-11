@@ -1,5 +1,8 @@
 Howdoi-Java
 ====
+[![Build
+Status](https://travis-ci.org/davgomgar/howdoi-java.svg?branch=master)](https://travis-ci.org/davgomgar/howdoi-java)
+
 This repo is a Java implementation of the well known
 [howdoi](https://github.com/gleitz/howdoi) library.
 
